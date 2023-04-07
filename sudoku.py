@@ -6,6 +6,7 @@ from cell import Cell
 # Ones in place hold that spot for testing before we decide
 
 
+
 # prints the initial menu where user selects difficulty level
 def start_menu():
     pygame.display.set_caption('Sudoku')
