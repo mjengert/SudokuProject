@@ -13,7 +13,7 @@ class Board:
     # draws entire board
     def draw(self, screen):
         # draws thick horizontal lines for 9x9 board
-        for i in range(1, BOARD_ROWS):
+        for i in range(1, BOARD_ROWS+1):
             pygame.draw.line(
                 screen,
                 LINE_COLOR,
@@ -38,7 +38,7 @@ class Board:
                 screen,
                 LINE_COLOR,
                 (i * SQUARE_SIZE, 0),
-                (i * SQUARE_SIZE, HEIGHT),
+                (i * SQUARE_SIZE, 675),
                 LINE_WIDTH
             )
 
@@ -48,7 +48,7 @@ class Board:
                 screen,
                 LINE_COLOR,
                 (i * IN_SQUARE_SIZE, 0),
-                (i * IN_SQUARE_SIZE, HEIGHT),
+                (i * IN_SQUARE_SIZE, 675),
                 IN_LINE_WIDTH
             )
 
