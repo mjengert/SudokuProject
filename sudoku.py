@@ -37,6 +37,7 @@ def easy_button(color):
     pygame.display.update()
 
 
+
 # draws medium button
 def med_button(color):
     smaller_font = pygame.font.Font('Rajdhani-Bold.ttf', 30)
