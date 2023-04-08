@@ -23,7 +23,7 @@ class Board:
             )
 
         # draws thin horizontal lines within each of the original 9x9 cells
-        for i in range(1, INNER_ROWS):
+        for i in range(0, INNER_ROWS):
             pygame.draw.line(
                 screen,
                 LINE_COLOR,
@@ -43,7 +43,7 @@ class Board:
             )
 
         # draws thin vertical lines within each of the original 9x9 cells
-        for i in range(1, INNER_ROWS):
+        for i in range(0, INNER_ROWS+1):
             pygame.draw.line(
                 screen,
                 LINE_COLOR,

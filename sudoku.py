@@ -177,5 +177,48 @@ while game_on:
                 reset_button((51, 50, 50))
                 restart_button((51, 50, 50))
                 exit_button((51, 50, 50))
+        # draws red box on selected cell for the first col
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                '''draws red box on the selected cell looks at mouse position (x,y) then draws red box around this 
+                coord. re-draws the sudoku board in between each cell selection to allow user to ensure one cell is 
+                chosen at a time. Had to make to if statements for first col and then all of the others '''
+                for i in range(9):
+                    for j in range(9):
+                        if (75 + 75 * i) <= mouse_pos[0] <= (150 + 75 * i) and (75 * j) <= mouse_pos[1] <= (75 * (j + 1)):
+                            game1.draw(screen)
+                            cell = Cell(0, 0, 0, screen)
+                            cell.draw((25, 10 + 75 * j), (75 + 75 * i), (75 * j))
+                        if 0 <= mouse_pos[0] <= 75 and (75 * j) <= mouse_pos[1] <= (75 * (j + 1)):
+                            game1.draw(screen)
+                            cell = Cell(0, 0, 0, screen)
+                            cell.draw((25, 10 + 75 * j), 0, (75 * j))
+                # not sure how to implement this yet
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_1:
+                        cell1 = Cell(1, 0, 0, screen)
+                        cell1.draw((25, 10), 0, 0)
+                    if event.key == pygame.K_2:
+                        pass
+                    if event.key == pygame.K_3:
+                        pass
+                    if event.key == pygame.K_4:
+                        pass
+                    if event.key == pygame.K_5:
+                        pass
+                    if event.key == pygame.K_6:
+                        pass
+                    if event.key == pygame.K_7:
+                        pass
+                    if event.key == pygame.K_8:
+                        pass
+                    if event.key == pygame.K_9:
+                        pass
+            # not working yet but can put a 1 in top left box
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_1:
+                    cell.set_cell_value(1)
+                    cell.draw((25, 10), 0, 0)
+                pass
+
         pygame.display.update()
 
