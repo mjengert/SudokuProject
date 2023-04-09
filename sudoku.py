@@ -91,6 +91,7 @@ def game_button_outlines(color):
     pygame.draw.rect(screen, color, [506.25 - 75, 695, 150, 50])
 
 # starts program and draws menu and buttons
+cell = Cell()
 game_on = True
 while game_on:
     pygame.init()
@@ -182,43 +183,110 @@ while game_on:
                 '''draws red box on the selected cell looks at mouse position (x,y) then draws red box around this 
                 coord. re-draws the sudoku board in between each cell selection to allow user to ensure one cell is 
                 chosen at a time. Had to make to if statements for first col and then all of the others '''
-                for i in range(9):
-                    for j in range(9):
-                        if (75 + 75 * i) <= mouse_pos[0] <= (150 + 75 * i) and (75 * j) <= mouse_pos[1] <= (75 * (j + 1)):
+                # needs to be fixed. cell selected twice deletes previously entered value.
+                for row in range(9):
+                    for col in range(9):
+                        if (75 + 75 * row) <= mouse_pos[0] <= (150 + 75 * row) and (75 * col) <= mouse_pos[1] <= (75 * (col + 1)):
                             game1.draw(screen)
-                            cell = Cell(0, 0, 0, screen)
-                            cell.draw((25, 10 + 75 * j), (75 + 75 * i), (75 * j))
-                        if 0 <= mouse_pos[0] <= 75 and (75 * j) <= mouse_pos[1] <= (75 * (j + 1)):
+                            cell = Cell(0, row, col, screen, (105 + 75 * row, 10 + 75 * col), (75 + 75 * row), (75 * col))
+                            cell.draw()
+                        if 0 <= mouse_pos[0] <= 75 and (75 * col) <= mouse_pos[1] <= (75 * (col + 1)):
                             game1.draw(screen)
-                            cell = Cell(0, 0, 0, screen)
-                            cell.draw((25, 10 + 75 * j), 0, (75 * j))
-                # not sure how to implement this yet
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_1:
-                        cell1 = Cell(1, 0, 0, screen)
-                        cell1.draw((25, 10), 0, 0)
-                    if event.key == pygame.K_2:
-                        pass
-                    if event.key == pygame.K_3:
-                        pass
-                    if event.key == pygame.K_4:
-                        pass
-                    if event.key == pygame.K_5:
-                        pass
-                    if event.key == pygame.K_6:
-                        pass
-                    if event.key == pygame.K_7:
-                        pass
-                    if event.key == pygame.K_8:
-                        pass
-                    if event.key == pygame.K_9:
-                        pass
-            # not working yet but can put a 1 in top left box
+                            cell = Cell(0, 0, col, screen, (30, 10 + 75 * col), 0, (75 * col))
+                            cell.draw()
+            '''prints number to the screen at the specific cells coords makes sure the cell is empty. if it isn't it 
+            prints white square to 'erase' previous number and then prints the new value'''
+            # plan to add backspace functionality
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
-                    cell.set_cell_value(1)
-                    cell.draw((25, 10), 0, 0)
-                pass
-
+                    if cell.value == 0:
+                        cell.set_cell_value(1)
+                        cell.draw()
+                    else:
+                        cell.set_cell_value(0)
+                        cell.draw()
+                        if cell.value == 0:
+                            cell.set_cell_value(1)
+                            cell.draw()
+                if event.key == pygame.K_2:
+                    if cell.value == 0:
+                        cell.set_cell_value(2)
+                        cell.draw()
+                    else:
+                        cell.set_cell_value(0)
+                        cell.draw()
+                        if cell.value == 0:
+                            cell.set_cell_value(2)
+                            cell.draw()
+                if event.key == pygame.K_3:
+                    if cell.value == 0:
+                        cell.set_cell_value(3)
+                        cell.draw()
+                    else:
+                        cell.set_cell_value(0)
+                        cell.draw()
+                        if cell.value == 0:
+                            cell.set_cell_value(3)
+                            cell.draw()
+                if event.key == pygame.K_4:
+                    if cell.value ==0:
+                        cell.set_cell_value(4)
+                        cell.draw()
+                    else:
+                        cell.set_cell_value(0)
+                        cell.draw()
+                        if cell.value == 0:
+                            cell.set_cell_value(4)
+                            cell.draw()
+                if event.key == pygame.K_5:
+                    if cell.value == 0:
+                        cell.set_cell_value(5)
+                        cell.draw()
+                    else:
+                        cell.set_cell_value(0)
+                        cell.draw()
+                        if cell.value == 0:
+                            cell.set_cell_value(5)
+                            cell.draw()
+                if event.key == pygame.K_6:
+                    if cell.value == 0:
+                        cell.set_cell_value(6)
+                        cell.draw()
+                    else:
+                        cell.set_cell_value(0)
+                        cell.draw()
+                        if cell.value == 0:
+                            cell.set_cell_value(6)
+                            cell.draw()
+                if event.key == pygame.K_7:
+                    if cell.value == 0:
+                        cell.set_cell_value(7)
+                        cell.draw()
+                    else:
+                        cell.set_cell_value(0)
+                        cell.draw()
+                        if cell.value == 0:
+                            cell.set_cell_value(7)
+                            cell.draw()
+                if event.key == pygame.K_8:
+                    if cell.value == 0:
+                        cell.set_cell_value(8)
+                        cell.draw()
+                    else:
+                        cell.set_cell_value(0)
+                        cell.draw()
+                        if cell.value == 0:
+                            cell.set_cell_value(8)
+                            cell.draw()
+                if event.key == pygame.K_9:
+                    if cell.value == 0:
+                        cell.set_cell_value(9)
+                        cell.draw()
+                    else:
+                        cell.set_cell_value(0)
+                        cell.draw()
+                        if cell.value == 0:
+                            cell.set_cell_value(9)
+                            cell.draw()
         pygame.display.update()
 
