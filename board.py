@@ -8,10 +8,11 @@ class Board:
         self.width = width
         self.height = height
         self.screen = screen
-        self.diff = difficulty
+        self.difficulty = difficulty  # previously self.diff = difficulty - Julius
 
     # draws entire board
     def draw(self, screen):
+
         # draws thick horizontal lines for 9x9 board
         for i in range(1, BOARD_ROWS+1):
             pygame.draw.line(

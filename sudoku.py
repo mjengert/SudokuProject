@@ -95,7 +95,7 @@ cell = Cell()
 game_on = True
 while game_on:
     pygame.init()
-    pygame.font.init()
+    #pygame.font.init() <- method is called automatically by pygame.init(), not required - Julius
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     # can change background; placeholder
     background_im = pygame.image.load("sudokuim.png")
