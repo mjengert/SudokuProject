@@ -53,32 +53,62 @@ class Board:
                 IN_LINE_WIDTH
             )
 
-    def select(self, row, col):
-        pass
+        def select(self, row, col):
+        # handles a selection on the board on the given row and column indices
+        self.selected_row = row
+        self.selected_col = col
 
     def click(self, x, y):
-        pass
+        # handles clicking on the board based on the given x and y coordinates
+        if x < 0 or x > self.width or y < 0 or y > self.height:
+            return
+
+        # Calculates the row and column based on the click coordinates
+        row = y // SQUARE_SIZE
+        col = x // SQUARE_SIZE
+
+        # Calls the select method to select the cell
+        self.select(row, col)
 
     def clear(self):
-        pass
+        # This method handles clearing the selected cell on the board
+        self.selected_row = None
+        self.selected_col = None
 
     def sketch(self, value):
-        pass
+        # allows sketching a tentative value in the currently selected cell
+        if self.selected_row is not None and self.selected_col is not None:
+            self.board[self.selected_row][self.selected_col] = value
 
     def place_number(self, value):
-        pass
+        # allows placing a confirmed value in the currently selected cell
+        if self.selected_row is not None and self.selected_col is not None:
+            self.board[self.selected_row][self.selected_col] = value
 
     def reset_to_original(self):
-        pass
+        # resets the board back to its original state
+        self.board = [[0 for _ in range(BOARD_COLS)] for _ in range(BOARD_ROWS)]
 
     def is_full(self):
-        pass
+        # checks if the board is completely filled with numbers
+        for row in self.board:
+            if 0 in row:
+                return False
+        return True
 
     def update_board(self):
+        # This method updates the visuals of the board to reflect the current state
+        # of the board's data
         pass
 
     def find_empty(self):
-        pass
+        # finds the next empty cell on the board (if any)
+        for row in range(BOARD_ROWS):
+            for col in range(BOARD_COLS):
+                if self.board[row][col] == 0:
+                    return row, col
+        return None, None
 
     def check_board(self):
+        #checks if the board is valid
         pass
