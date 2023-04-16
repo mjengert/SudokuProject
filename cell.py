@@ -2,8 +2,9 @@ import pygame
 
 
 class Cell:
+    board = []
 
-    def __init__(self, value=0, row=0, col=0, screen=None, coords=0, coordx=0, coordy=0):
+    def __init__(self, value=0, col=0, row=0, screen=None, coords=0, coordx=0, coordy=0):
         self.value = value
         self.row = row
         self.col = col
@@ -11,19 +12,21 @@ class Cell:
         self.coords = coords
         self.coordx = coordx
         self.coordy = coordy
+        Cell.board.append(self)
 
     def set_cell_value(self, value):
         self.value = value
 
     def set_sketched_value(self, value):
         self.value = value
+        if self.value != 0:
+            smaller_font = pygame.font.Font('Rajdhani-Bold.ttf', 45)
+            num = smaller_font.render(f'{self.value}', True, (51, 50, 50))
+            self.screen.blit(num, (self.coordx+28, self.coordy+10))
+        else:
+            pygame.draw.rect(self.screen, (252, 3, 3), [self.coordx, self.coordy, 76, 76], 2)
+            pygame.draw.rect(self.screen, (255, 255, 255), [self.coordx+3, self.coordy+3, 71, 71])
+
 
     def draw(self):
-        smaller_font = pygame.font.Font('Rajdhani-Bold.ttf', 45)
-        num = smaller_font.render(f'{self.value}', True, (51, 50, 50))
-        if self.value == 0:
-            pygame.draw.rect(self.screen, (255, 255, 255), [self.coordx, self.coordy, 76, 76])
-            pygame.draw.rect(self.screen, (252, 3, 3), [self.coordx, self.coordy, 76, 76], 2)
-        else:
-            self.screen.blit(num, self.coords)
-            pygame.draw.rect(self.screen, (252, 3, 3), [self.coordx, self.coordy, 76, 76], 2)
+        pygame.draw.rect(self.screen, (252, 3, 3), [self.coordx, self.coordy, 76, 76], 2)

@@ -53,7 +53,7 @@ class Board:
                 IN_LINE_WIDTH
             )
 
-        def select(self, row, col):
+    def select(self, row, col):
         # handles a selection on the board on the given row and column indices
         self.selected_row = row
         self.selected_col = col
