@@ -24,23 +24,21 @@ class SudokuGenerator:
 	None
     '''
 
-    def __init__(self, removed_cells, row_length=9): #  row_length had to be moved to the end due to having a value
+    def __init__(self, removed_cells, row_length=9):  # row_length had to be moved to the end due to having a value
         self.row_length = row_length  # row_length is always 9 per instructions - Julius
         self.removed_cells = removed_cells  # removed_cells could vary depending on the difficulty level chosen
+        self.board = [[0 for row in range(row_length)] for col in range(row_length)]  # makes board
+        self.box_length = math.sqrt(row_length)  # creates box length
 
     '''
 	Returns a 2D python list of numbers which represents the board
 	Parameters: None
 	Return: list[list]
     '''
-    # WIP - Julius
-    def get_board(self):
-        board = []
-        #for i in range(9):
-            #for j in range(9):
 
-            #return
-        pass
+    # returns board in form of 9 lists within a list
+    def get_board(self):
+        return self.board
 
     '''
 	Displays the board to the console
@@ -50,8 +48,12 @@ class SudokuGenerator:
 	Return: None
     '''
 
+    # prints board to the console
     def print_board(self):
-        pass
+        for row in range(self.row_length):
+            for col in range(self.row_length):
+                print(self.board[row][col], end=' ')
+            print()
 
     '''
 	Determines if num is contained in the specified row (horizontal) of the board

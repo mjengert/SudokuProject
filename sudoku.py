@@ -2,6 +2,7 @@ import pygame, sys
 from constants import *
 from board import Board
 from cell import Cell
+from sudoku_generator import SudokuGenerator
 
 
 # We can discuss font choice and background/color scheme together
@@ -117,13 +118,19 @@ while game_on:
             mouse_pos = pygame.mouse.get_pos()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 420 <= mouse_pos[1] <= 420 + 40:
+                    # creates game board and starts the generator for easy diff.
                     game1 = Board(WIDTH, HEIGHT, screen, 'Easy')
+                    sudoku_gen = SudokuGenerator(30)
                     menu = False
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 500 <= mouse_pos[1] <= 500 + 40:
+                    # creates game board and starts the generator for medium diff.
                     game1 = Board(WIDTH, HEIGHT, screen, 'Medium')
+                    sudoku_gen = SudokuGenerator(40)
                     menu = False
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 580 <= mouse_pos[1] <= 580 + 40:
+                    # creates game board and starts the generator for hard diff.
                     game1 = Board(WIDTH, HEIGHT, screen, 'Hard')
+                    sudoku_gen = SudokuGenerator(50)
                     menu = False
             # changes the color of the button if it is being hovered over
             if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 420 <= mouse_pos[1] <= 420 + 40:
@@ -142,9 +149,7 @@ while game_on:
     # when difficulty is chosen, second while loop begins and sudoku board and buttons is printed
     screen.fill(BG_COLOR)
     game1.draw(screen)
-    '''creates all cells. Not sure if there is a simpler way to do this but it is the only way that i was able to 
-    come up with to allow each cell to not reset when it is chosen twice. let me know if anyone has a better idea
-            - Maralynn'''
+    # creates all cells. will need to modify in the future when prefilled cells are created
     cell1 = Cell(0, 0, 0, screen, (0, 0), 0, 0)
     cell2 = Cell(0, 0, 1, screen, (75, 0), 75, 0)
     cell3 = Cell(0, 0, 2, screen, (150, 0), 150, 0)
@@ -271,18 +276,19 @@ while game_on:
                 chosen at a time. calls select() function to record what cell is being selected for input purposes'''
                 for row in range(9):
                     for col in range(9):
-                        if (75 + 75 * row) <= mouse_pos[0] <= (150 + 75 * row) and (75 * col) <= mouse_pos[1] <= (75 * (col + 1)):
+                        if (75 + 75 * row) <= mouse_pos[0] <= (150 + 75 * row) and (75 * col) <= mouse_pos[1] <= (
+                                75 * (col + 1)):
                             game1.draw(screen)
                             for cell in Cell.board:
                                 if cell.row == row + 1 and cell.col == col:
                                     cell.draw()
-                                    game1.select(row+1, col)
+                                    game1.select(row + 1, col)
                         if 0 <= mouse_pos[0] <= 75 and (75 * col) <= mouse_pos[1] <= (75 * (col + 1)):
                             game1.draw(screen)
                             for cell in Cell.board:
                                 if cell.row == 0 and cell.col == col:
                                     cell.draw()
-                                    game1.select(row-8, col)
+                                    game1.select(row - 8, col)
             '''prints number to the screen at the specific cells coords if the cell is empty. if backspace is entered, 
             then the cell resets and a becomes empty again'''
             if event.type == pygame.KEYDOWN:
