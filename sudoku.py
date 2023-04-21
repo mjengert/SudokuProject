@@ -2,7 +2,7 @@ import pygame, sys
 from constants import *
 from board import Board
 from cell import Cell
-from sudoku_generator import SudokuGenerator
+from sudoku_generator import SudokuGenerator, generate_sudoku, print_board
 
 
 # We can discuss font choice and background/color scheme together
@@ -120,17 +120,20 @@ while game_on:
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 420 <= mouse_pos[1] <= 420 + 40:
                     # creates game board and starts the generator for easy diff.
                     game1 = Board(WIDTH, HEIGHT, screen, 'Easy')
-                    sudoku_gen = SudokuGenerator(30)
+                    sudoku_gen = generate_sudoku(9, 30)
+                    print_board(sudoku_gen)
                     menu = False
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 500 <= mouse_pos[1] <= 500 + 40:
                     # creates game board and starts the generator for medium diff.
                     game1 = Board(WIDTH, HEIGHT, screen, 'Medium')
-                    sudoku_gen = SudokuGenerator(40)
+                    sudoku_gen = generate_sudoku(9, 40)
+                    print_board(sudoku_gen)
                     menu = False
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 580 <= mouse_pos[1] <= 580 + 40:
                     # creates game board and starts the generator for hard diff.
                     game1 = Board(WIDTH, HEIGHT, screen, 'Hard')
-                    sudoku_gen = SudokuGenerator(50)
+                    sudoku_gen = generate_sudoku(9, 50)
+                    print_board(sudoku_gen)
                     menu = False
             # changes the color of the button if it is being hovered over
             if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 420 <= mouse_pos[1] <= 420 + 40:
