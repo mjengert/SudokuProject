@@ -234,9 +234,10 @@ while game_on:
                  Cell(sudoku_gen[8][7], 8, 7, screen, (525, 600), 525, 600),
                  Cell(sudoku_gen[8][8], 8, 8, screen, (600, 600), 600, 600)]
 
+    reset_cells = []
     for cell in all_cells:
-        if cell.value != 0:
-            cell.set_sketched_value(cell.value)
+        if cell.value == 0:
+            reset_cells.append(cell.value)
 
     game_button_outlines(BORDER_COLOR)
     exit_button(BUTTON_COLOR)
