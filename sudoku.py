@@ -238,6 +238,10 @@ while game_on:
     for cell in all_cells:
         copy_board.append(cell.value)
 
+    copy_board = []
+    for cell in all_cells:
+        copy_board.append(cell)
+
     for cell in all_cells:
         if cell.value != 0:
             cell.set_sketched_value(cell.value)
@@ -360,7 +364,6 @@ while game_on:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
                             cell.set_sketched_value(copy_board[pos])
                         pos += 1
-
                 # not done yet
                 if event.key == pygame.K_KP_ENTER:
                     for cell in Cell.board:
