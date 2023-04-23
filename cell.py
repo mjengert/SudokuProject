@@ -22,11 +22,9 @@ class Cell:
         if self.value != 0:
             smaller_font = pygame.font.Font('Rajdhani-Bold.ttf', 45)
             num = smaller_font.render(f'{self.value}', True, (51, 50, 50))
-            self.screen.blit(num, (self.coordx+28, self.coordy+10))
+            self.screen.blit(num, (self.coordx + 28, self.coordy + 10))
         else:
-            pygame.draw.rect(self.screen, (252, 3, 3), [self.coordx, self.coordy, 76, 76], 2)
-            pygame.draw.rect(self.screen, (255, 255, 255), [self.coordx+3, self.coordy+3, 71, 71])
-
+            pygame.draw.rect(self.screen, (255, 255, 255), [self.coordx + 3, self.coordy + 3, 71, 71])
 
     def draw(self):
         pygame.draw.rect(self.screen, (252, 3, 3), [self.coordx, self.coordy, 76, 76], 2)
