@@ -110,5 +110,34 @@ class Board:
         return None, None
 
     def check_board(self):
-        #checks if the board is valid
-        pass
+    # Checks if the board is valid according to Sudoku rules
+
+       # Check rows
+       for row in self.board:
+           if not self.is_valid(row):
+               return False
+
+       # Check columns
+       for col in range(BOARD_COLS):
+           column = [self.board[row][col] for row in range(BOARD_ROWS)]
+           if not self.is_valid(column):
+               return False
+
+       # Check 3x3 grids
+       for i in range(0, BOARD_ROWS, 3):
+           for j in range(0, BOARD_COLS, 3):
+               grid = [self.board[row][col] for row in range(i, i + 3) for col in range(j, j + 3)]
+               if not self.is_valid(grid):
+                   return False
+
+       return True
+
+   def is_valid(self, numbers):
+    # Helper method to check if a list of numbers is valid (no duplicates except for zeros)
+     seen = set()
+     for number in numbers:
+         if number != 0 and number in seen:
+             return False
+         seen.add(number)
+     return True
+
