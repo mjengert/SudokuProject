@@ -99,13 +99,12 @@ while game_on:
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     # can change background; placeholder - Maralynn
-    background_im = pygame.image.load("sudokuim.png")
-    screen.blit(background_im, (0, 0))
+    screen.fill((167, 242, 242))
     start_menu()
-    start_button_outlines((64, 94, 0))
-    easy_button((51, 50, 50))
-    med_button((51, 50, 50))
-    hard_button((51, 50, 50))
+    start_button_outlines(BORDER_COLOR)
+    easy_button(BUTTON_COLOR)
+    med_button(BUTTON_COLOR)
+    hard_button(BUTTON_COLOR)
     # initializes the menu screen
     menu = True
     while menu:
@@ -137,16 +136,16 @@ while game_on:
                     menu = False
             # changes the color of the button if it is being hovered over
             if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 420 <= mouse_pos[1] <= 420 + 40:
-                easy_button((130, 127, 127))
+                easy_button(HOVER_BUTTON)
             elif 267.5 <= mouse_pos[0] <= 337.5 + 70 and 500 <= mouse_pos[1] <= 500 + 40:
-                med_button((130, 127, 127))
+                med_button(HOVER_BUTTON)
             elif 267.5 <= mouse_pos[0] <= 337.5 + 70 and 580 <= mouse_pos[1] <= 580 + 40:
-                hard_button((130, 127, 127))
+                hard_button(HOVER_BUTTON)
             # if button isn't being hovered over, it returns back to original color
             else:
-                easy_button((51, 50, 50))
-                med_button((51, 50, 50))
-                hard_button((51, 50, 50))
+                easy_button(BUTTON_COLOR)
+                med_button(BUTTON_COLOR)
+                hard_button(BUTTON_COLOR)
         pygame.display.update()
 
     # when difficulty is chosen, second while loop begins and sudoku board and buttons is printed
@@ -235,10 +234,10 @@ while game_on:
     cell80 = Cell(0, 8, 7, screen, (525, 600), 525, 600)
     cell81 = Cell(0, 8, 8, screen, (600, 600), 600, 600)
 
-    game_button_outlines((64, 94, 0))
-    exit_button((51, 50, 50))
-    restart_button((51, 50, 50))
-    reset_button((51, 50, 50))
+    game_button_outlines(BORDER_COLOR)
+    exit_button(BUTTON_COLOR)
+    restart_button(BUTTON_COLOR)
+    reset_button(BUTTON_COLOR)
     # begins game
     game_start = True
     while game_start:
@@ -262,16 +261,16 @@ while game_on:
                     sys.exit()
             # changes the color of the button if it is being hovered over
             if 98.75 <= mouse_pos[0] <= 168.75 + 70 and 700 <= mouse_pos[1] <= 700 + 40:
-                reset_button((130, 127, 127))
+                reset_button(HOVER_BUTTON)
             elif 267.5 <= mouse_pos[0] <= 337.5 + 70 and 700 <= mouse_pos[1] <= 700 + 40:
-                restart_button((130, 127, 127))
+                restart_button(HOVER_BUTTON)
             elif 436.25 <= mouse_pos[0] <= 506.25 + 70 and 700 <= mouse_pos[1] <= 700 + 40:
-                exit_button((130, 127, 127))
+                exit_button(HOVER_BUTTON)
             # if button isn't being hovered over, it returns back to original color
             else:
-                reset_button((51, 50, 50))
-                restart_button((51, 50, 50))
-                exit_button((51, 50, 50))
+                reset_button(BUTTON_COLOR)
+                restart_button(BUTTON_COLOR)
+                exit_button(BUTTON_COLOR)
             # draws red box on selected cell for the first col
             if event.type == pygame.MOUSEBUTTONDOWN:
                 '''draws red box on the selected cell looks at mouse position (x,y) then draws red box around this 
