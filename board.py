@@ -130,7 +130,7 @@ class Board:
                if not self.is_valid(grid):
                    return False
 
-    return True
+       return True
 
    def is_valid(self, numbers):
     # Helper method to check if a list of numbers is valid (no duplicates except for zeros)
