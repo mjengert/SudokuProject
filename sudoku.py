@@ -152,87 +152,33 @@ while game_on:
     screen.fill(BG_COLOR)
     game1.draw(screen)
     # creates all cells. will need to modify in the future when prefilled cells are created
-    cell1 = Cell(sudoku_gen[0][0], 0, 0, screen, (0, 0), 0, 0)
-    cell2 = Cell(sudoku_gen[0][1], 0, 1, screen, (75, 0), 75, 0)
-    cell3 = Cell(sudoku_gen[0][2], 0, 2, screen, (150, 0), 150, 0)
-    cell4 = Cell(sudoku_gen[0][3], 0, 3, screen, (225, 0), 225, 0)
-    cell5 = Cell(sudoku_gen[0][4], 0, 4, screen, (300, 0), 300, 0)
-    cell6 = Cell(sudoku_gen[0][5], 0, 5, screen, (375, 0), 375, 0)
-    cell7 = Cell(sudoku_gen[0][6], 0, 6, screen, (450, 0), 450, 0)
-    cell8 = Cell(sudoku_gen[0][7], 0, 7, screen, (525, 0), 525, 0)
-    cell9 = Cell(sudoku_gen[0][8], 0, 8, screen, (600, 0), 600, 0)
-    cell10 = Cell(sudoku_gen[1][0], 1, 0, screen, (0, 75), 0, 75)
-    cell11 = Cell(sudoku_gen[1][1], 1, 1, screen, (75, 75), 75, 75)
-    cell12 = Cell(sudoku_gen[1][2], 1, 2, screen, (150, 75), 150, 75)
-    cell13 = Cell(sudoku_gen[1][3], 1, 3, screen, (225, 75), 225, 75)
-    cell14 = Cell(sudoku_gen[1][4], 1, 4, screen, (300, 75), 300, 75)
-    cell15 = Cell(sudoku_gen[1][5], 1, 5, screen, (375, 75), 375, 75)
-    cell16 = Cell(sudoku_gen[1][6], 1, 6, screen, (450, 75), 450, 75)
-    cell17 = Cell(sudoku_gen[1][7], 1, 7, screen, (525, 75), 525, 75)
-    cell18 = Cell(sudoku_gen[1][8], 1, 8, screen, (600, 75), 600, 75)
-    cell19 = Cell(sudoku_gen[2][0], 2, 0, screen, (0, 150), 0, 150)
-    cell20 = Cell(sudoku_gen[2][1], 2, 1, screen, (75, 150), 75, 150)
-    cell21 = Cell(sudoku_gen[2][2], 2, 2, screen, (150, 150), 150, 150)
-    cell22 = Cell(sudoku_gen[2][3], 2, 3, screen, (225, 150), 225, 150)
-    cell23 = Cell(sudoku_gen[2][4], 2, 4, screen, (300, 150), 300, 150)
-    cell24 = Cell(sudoku_gen[2][5], 2, 5, screen, (375, 150), 375, 150)
-    cell25 = Cell(sudoku_gen[2][6], 2, 6, screen, (450, 150), 450, 150)
-    cell26 = Cell(sudoku_gen[2][7], 2, 7, screen, (525, 150), 525, 150)
-    cell27 = Cell(sudoku_gen[2][8], 2, 8, screen, (600, 150), 600, 150)
-    cell28 = Cell(sudoku_gen[3][0], 3, 0, screen, (0, 225), 0, 225)
-    cell29 = Cell(sudoku_gen[3][1], 3, 1, screen, (75, 225), 75, 225)
-    cell30 = Cell(sudoku_gen[3][2], 3, 2, screen, (150, 225), 150, 225)
-    cell31 = Cell(sudoku_gen[3][3], 3, 3, screen, (225, 225), 225, 225)
-    cell32 = Cell(sudoku_gen[3][4], 3, 4, screen, (300, 225), 300, 225)
-    cell33 = Cell(sudoku_gen[3][5], 3, 5, screen, (375, 225), 375, 225)
-    cell34 = Cell(sudoku_gen[3][6], 3, 6, screen, (450, 225), 450, 225)
-    cell35 = Cell(sudoku_gen[3][7], 3, 7, screen, (525, 225), 525, 225)
-    cell36 = Cell(sudoku_gen[3][8], 3, 8, screen, (600, 225), 600, 225)
-    cell37 = Cell(sudoku_gen[4][0], 4, 0, screen, (0, 300), 0, 300)
-    cell38 = Cell(sudoku_gen[4][1], 4, 1, screen, (75, 300), 75, 300)
-    cell39 = Cell(sudoku_gen[4][2], 4, 2, screen, (150, 300), 150, 300)
-    cell40 = Cell(sudoku_gen[4][3], 4, 3, screen, (225, 300), 225, 300)
-    cell41 = Cell(sudoku_gen[4][4], 4, 4, screen, (300, 300), 300, 300)
-    cell42 = Cell(sudoku_gen[4][5], 4, 5, screen, (375, 300), 375, 300)
-    cell43 = Cell(sudoku_gen[4][6], 4, 6, screen, (450, 300), 450, 300)
-    cell44 = Cell(sudoku_gen[4][7], 4, 7, screen, (525, 300), 525, 300)
-    cell45 = Cell(sudoku_gen[4][8], 4, 8, screen, (600, 300), 600, 300)
-    cell46 = Cell(sudoku_gen[5][0], 5, 0, screen, (0, 375), 0, 375)
-    cell47 = Cell(sudoku_gen[5][1], 5, 1, screen, (75, 375), 75, 375)
-    cell48 = Cell(sudoku_gen[5][2], 5, 2, screen, (150, 375), 150, 375)
-    cell49 = Cell(sudoku_gen[5][3], 5, 3, screen, (225, 375), 225, 375)
-    cell50 = Cell(sudoku_gen[5][4], 5, 4, screen, (300, 375), 300, 375)
-    cell51 = Cell(sudoku_gen[5][5], 5, 5, screen, (375, 375), 375, 375)
-    cell52 = Cell(sudoku_gen[5][6], 5, 6, screen, (450, 375), 450, 375)
-    cell53 = Cell(sudoku_gen[5][7], 5, 7, screen, (525, 375), 525, 375)
-    cell54 = Cell(sudoku_gen[5][8], 5, 8, screen, (600, 375), 600, 375)
-    cell55 = Cell(sudoku_gen[6][0], 6, 0, screen, (0, 450), 0, 450)
-    cell56 = Cell(sudoku_gen[6][1], 6, 1, screen, (75, 450), 75, 450)
-    cell57 = Cell(sudoku_gen[6][2], 6, 2, screen, (150, 450), 150, 450)
-    cell58 = Cell(sudoku_gen[6][3], 6, 3, screen, (225, 450), 225, 450)
-    cell59 = Cell(sudoku_gen[6][4], 6, 4, screen, (300, 450), 300, 450)
-    cell60 = Cell(sudoku_gen[6][5], 6, 5, screen, (375, 450), 375, 450)
-    cell61 = Cell(sudoku_gen[6][6], 6, 6, screen, (450, 450), 450, 450)
-    cell62 = Cell(sudoku_gen[6][7], 6, 7, screen, (525, 450), 525, 450)
-    cell63 = Cell(sudoku_gen[6][8], 6, 8, screen, (600, 450), 600, 450)
-    cell64 = Cell(sudoku_gen[7][0], 7, 0, screen, (0, 525), 0, 525)
-    cell65 = Cell(sudoku_gen[7][1], 7, 1, screen, (75, 525), 75, 525)
-    cell66 = Cell(sudoku_gen[7][2], 7, 2, screen, (150, 525), 150, 525)
-    cell67 = Cell(sudoku_gen[7][3], 7, 3, screen, (225, 525), 225, 525)
-    cell68 = Cell(sudoku_gen[7][4], 7, 4, screen, (300, 525), 300, 525)
-    cell69 = Cell(sudoku_gen[7][5], 7, 5, screen, (375, 525), 375, 525)
-    cell70 = Cell(sudoku_gen[7][6], 7, 6, screen, (450, 525), 450, 525)
-    cell71 = Cell(sudoku_gen[7][7], 7, 7, screen, (525, 525), 525, 525)
-    cell72 = Cell(sudoku_gen[7][8], 7, 8, screen, (600, 525), 600, 525)
-    cell73 = Cell(sudoku_gen[8][0], 8, 0, screen, (0, 600), 0, 600)
-    cell74 = Cell(sudoku_gen[8][1], 8, 1, screen, (75, 600), 75, 600)
-    cell75 = Cell(sudoku_gen[8][2], 8, 2, screen, (150, 600), 150, 600)
-    cell76 = Cell(sudoku_gen[8][3], 8, 3, screen, (225, 600), 225, 600)
-    cell77 = Cell(sudoku_gen[8][4], 8, 4, screen, (300, 600), 300, 600)
-    cell78 = Cell(sudoku_gen[8][5], 8, 5, screen, (375, 600), 375, 600)
-    cell79 = Cell(sudoku_gen[8][6], 8, 6, screen, (450, 600), 450, 600)
-    cell80 = Cell(sudoku_gen[8][7], 8, 7, screen, (525, 600), 525, 600)
-    cell81 = Cell(sudoku_gen[8][8], 8, 8, screen, (600, 600), 600, 600)
+    all_cells = list(Cell(sudoku_gen[0][0], 0, 0, screen, (0, 0), 0, 0), Cell(sudoku_gen[0][1], 0, 1, screen, (75, 0), 75, 0), Cell(sudoku_gen[0][2], 0, 2, screen, (150, 0), 150, 0),
+                     Cell(sudoku_gen[0][3], 0, 3, screen, (225, 0), 225, 0), Cell(sudoku_gen[0][4], 0, 4, screen, (300, 0), 300, 0), Cell(sudoku_gen[0][5], 0, 5, screen, (375, 0), 375, 0),
+                     Cell(sudoku_gen[0][6], 0, 6, screen, (450, 0), 450, 0), Cell(sudoku_gen[0][7], 0, 7, screen, (525, 0), 525, 0), Cell(sudoku_gen[0][8], 0, 8, screen, (600, 0), 600, 0),
+                     Cell(sudoku_gen[1][0], 1, 0, screen, (0, 75), 0, 75), Cell(sudoku_gen[1][1], 1, 1, screen, (75, 75), 75, 75), Cell(sudoku_gen[1][2], 1, 2, screen, (150, 75), 150, 75),
+                     Cell(sudoku_gen[1][3], 1, 3, screen, (225, 75), 225, 75), Cell(sudoku_gen[1][4], 1, 4, screen, (300, 75), 300, 75), Cell(sudoku_gen[1][5], 1, 5, screen, (375, 75), 375, 75),
+                     Cell(sudoku_gen[1][6], 1, 6, screen, (450, 75), 450, 75), Cell(sudoku_gen[1][7], 1, 7, screen, (525, 75), 525, 75), Cell(sudoku_gen[1][8], 1, 8, screen, (600, 75), 600, 75),
+                     Cell(sudoku_gen[2][0], 2, 0, screen, (0, 150), 0, 150), Cell(sudoku_gen[2][1], 2, 1, screen, (75, 150), 75, 150), Cell(sudoku_gen[2][2], 2, 2, screen, (150, 150), 150, 150),
+                     Cell(sudoku_gen[2][3], 2, 3, screen, (225, 150), 225, 150), Cell(sudoku_gen[2][4], 2, 4, screen, (300, 150), 300, 150), Cell(sudoku_gen[2][5], 2, 5, screen, (375, 150), 375, 150),
+                     Cell(sudoku_gen[2][6], 2, 6, screen, (450, 150), 450, 150), Cell(sudoku_gen[2][7], 2, 7, screen, (525, 150), 525, 150), Cell(sudoku_gen[2][8], 2, 8, screen, (600, 150), 600, 150),
+                     Cell(sudoku_gen[3][0], 3, 0, screen, (0, 225), 0, 225), Cell(sudoku_gen[3][1], 3, 1, screen, (75, 225), 75, 225), Cell(sudoku_gen[3][2], 3, 2, screen, (150, 225), 150, 225),
+                     Cell(sudoku_gen[3][3], 3, 3, screen, (225, 225), 225, 225), Cell(sudoku_gen[3][4], 3, 4, screen, (300, 225), 300, 225), Cell(sudoku_gen[3][5], 3, 5, screen, (375, 225), 375, 225),
+                     Cell(sudoku_gen[3][6], 3, 6, screen, (450, 225), 450, 225), Cell(sudoku_gen[3][7], 3, 7, screen, (525, 225), 525, 225), Cell(sudoku_gen[3][8], 3, 8, screen, (600, 225), 600, 225),
+                     Cell(sudoku_gen[4][0], 4, 0, screen, (0, 300), 0, 300), Cell(sudoku_gen[4][1], 4, 1, screen, (75, 300), 75, 300), Cell(sudoku_gen[4][2], 4, 2, screen, (150, 300), 150, 300),
+                     Cell(sudoku_gen[4][3], 4, 3, screen, (225, 300), 225, 300), Cell(sudoku_gen[4][4], 4, 4, screen, (300, 300), 300, 300), Cell(sudoku_gen[4][5], 4, 5, screen, (375, 300), 375, 300),
+                     Cell(sudoku_gen[4][6], 4, 6, screen, (450, 300), 450, 300), Cell(sudoku_gen[4][7], 4, 7, screen, (525, 300), 525, 300), Cell(sudoku_gen[4][8], 4, 8, screen, (600, 300), 600, 300),
+                     Cell(sudoku_gen[5][0], 5, 0, screen, (0, 375), 0, 375), Cell(sudoku_gen[5][1], 5, 1, screen, (75, 375), 75, 375), Cell(sudoku_gen[5][2], 5, 2, screen, (150, 375), 150, 375),
+                     Cell(sudoku_gen[5][3], 5, 3, screen, (225, 375), 225, 375), Cell(sudoku_gen[5][4], 5, 4, screen, (300, 375), 300, 375), Cell(sudoku_gen[5][5], 5, 5, screen, (375, 375), 375, 375),
+                     Cell(sudoku_gen[5][6], 5, 6, screen, (450, 375), 450, 375), Cell(sudoku_gen[5][7], 5, 7, screen, (525, 375), 525, 375), Cell(sudoku_gen[5][8], 5, 8, screen, (600, 375), 600, 375),
+                     Cell(sudoku_gen[6][0], 6, 0, screen, (0, 450), 0, 450), Cell(sudoku_gen[6][1], 6, 1, screen, (75, 450), 75, 450), Cell(sudoku_gen[6][2], 6, 2, screen, (150, 450), 150, 450),
+                     Cell(sudoku_gen[6][3], 6, 3, screen, (225, 450), 225, 450), Cell(sudoku_gen[6][4], 6, 4, screen, (300, 450), 300, 450), Cell(sudoku_gen[6][5], 6, 5, screen, (375, 450), 375, 450),
+                     Cell(sudoku_gen[6][6], 6, 6, screen, (450, 450), 450, 450), Cell(sudoku_gen[6][7], 6, 7, screen, (525, 450), 525, 450), Cell(sudoku_gen[6][8], 6, 8, screen, (600, 450), 600, 450),
+                     Cell(sudoku_gen[7][0], 7, 0, screen, (0, 525), 0, 525), Cell(sudoku_gen[7][1], 7, 1, screen, (75, 525), 75, 525), Cell(sudoku_gen[7][2], 7, 2, screen, (150, 525), 150, 525),
+                     Cell(sudoku_gen[7][3], 7, 3, screen, (225, 525), 225, 525), Cell(sudoku_gen[7][4], 7, 4, screen, (300, 525), 300, 525), Cell(sudoku_gen[7][5], 7, 5, screen, (375, 525), 375, 525),
+                     Cell(sudoku_gen[7][6], 7, 6, screen, (450, 525), 450, 525), Cell(sudoku_gen[7][7], 7, 7, screen, (525, 525), 525, 525), Cell(sudoku_gen[7][8], 7, 8, screen, (600, 525), 600, 525),
+                     Cell(sudoku_gen[8][0], 8, 0, screen, (0, 600), 0, 600), Cell(sudoku_gen[8][1], 8, 1, screen, (75, 600), 75, 600), Cell(sudoku_gen[8][2], 8, 2, screen, (150, 600), 150, 600),
+                     Cell(sudoku_gen[8][3], 8, 3, screen, (225, 600), 225, 600), Cell(sudoku_gen[8][4], 8, 4, screen, (300, 600), 300, 600), Cell(sudoku_gen[8][5], 8, 5, screen, (375, 600), 375, 600),
+                     Cell(sudoku_gen[8][6], 8, 6, screen, (450, 600), 450, 600), Cell(sudoku_gen[8][7], 8, 7, screen, (525, 600), 525, 600), Cell(sudoku_gen[8][8], 8, 8, screen, (600, 600), 600, 600))
 
     game_button_outlines(BORDER_COLOR)
     exit_button(BUTTON_COLOR)
