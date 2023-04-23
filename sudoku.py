@@ -234,6 +234,8 @@ while game_on:
                  Cell(sudoku_gen[8][7], 8, 7, screen, (525, 600), 525, 600),
                  Cell(sudoku_gen[8][8], 8, 8, screen, (600, 600), 600, 600)]
 
+    board_copy = sudoku_gen[:]
+
     copy_board = []
     for cell in all_cells:
         copy_board.append(cell)
@@ -355,10 +357,10 @@ while game_on:
                             if cell.value == 0:
                                 cell.set_sketched_value(9)
                 if event.key == pygame.K_BACKSPACE:
-                    for cell in Cell.board:
+                    for cell in board_copy:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                            if cell.value != 0:
-                                cell.set_sketched_value(0)
+                            if cell.value == 0:
+                                cell.set_sketched_value(cell.value)
                 # not done yet
                 if event.key == pygame.K_KP_ENTER:
                     for cell in Cell.board:
