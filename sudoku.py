@@ -234,6 +234,10 @@ while game_on:
                  Cell(sudoku_gen[8][7], 8, 7, screen, (525, 600), 525, 600),
                  Cell(sudoku_gen[8][8], 8, 8, screen, (600, 600), 600, 600)]
 
+    for cell in all_cells:
+        if cell.value != 0:
+            cell.set_sketched_value(cell.value)
+
     reset_cells = []
     for cell in all_cells:
         if cell.value == 0:
