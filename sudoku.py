@@ -241,7 +241,7 @@ while game_on:
     reset_cells = []
     for cell in all_cells:
         if cell.value == 0:
-            reset_cells.append(cell.value)
+            reset_cells.append(cell)
 
     game_button_outlines(BORDER_COLOR)
     exit_button(BUTTON_COLOR)
@@ -260,7 +260,9 @@ while game_on:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 # not done
                 if 98.75 <= mouse_pos[0] <= 168.75 + 70 and 700 <= mouse_pos[1] <= 700 + 40:
-                    pass
+                    for cell in reset_cells:
+                        cell.set_sketched_value(0)
+                        game1.draw(screen)
                 # brings user back to start menu
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 700 <= mouse_pos[1] <= 700 + 40:
                     game_start = False
