@@ -132,12 +132,12 @@ class Board:
 
        return True
 
-   def is_valid(self, numbers):
+    def is_valid(self, numbers):
     # Helper method to check if a list of numbers is valid (no duplicates except for zeros)
-     seen = set()
-     for number in numbers:
-         if number != 0 and number in seen:
-             return False
-         seen.add(number)
-     return True
+        seen = set()
+        for number in numbers:
+            if number != 0 and number in seen:
+                return False
+            seen.add(number)
+        return True
 
