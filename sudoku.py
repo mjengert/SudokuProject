@@ -5,10 +5,6 @@ from cell import Cell
 from sudoku_generator import SudokuGenerator, generate_sudoku, print_board
 
 
-# We can discuss font choice and background/color scheme together
-# Ones in place hold that spot for testing before we decide -Maralynn
-
-
 # prints the initial menu where user selects difficulty level
 def start_menu():
     pygame.display.set_caption('Sudoku')
@@ -118,20 +114,20 @@ while game_on:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 420 <= mouse_pos[1] <= 420 + 40:
                     # creates game board and starts the generator for easy diff.
-                    game1 = Board(WIDTH, HEIGHT, screen, 'Easy')
                     sudoku_gen = generate_sudoku(9, 30)
+                    game1 = Board(WIDTH, HEIGHT, screen, 'Easy', sudoku_gen)
                     print_board(sudoku_gen)
                     menu = False
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 500 <= mouse_pos[1] <= 500 + 40:
                     # creates game board and starts the generator for medium diff.
-                    game1 = Board(WIDTH, HEIGHT, screen, 'Medium')
                     sudoku_gen = generate_sudoku(9, 40)
+                    game1 = Board(WIDTH, HEIGHT, screen, 'Medium', sudoku_gen)
                     print_board(sudoku_gen)
                     menu = False
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 580 <= mouse_pos[1] <= 580 + 40:
                     # creates game board and starts the generator for hard diff.
-                    game1 = Board(WIDTH, HEIGHT, screen, 'Hard')
                     sudoku_gen = generate_sudoku(9, 50)
+                    game1 = Board(WIDTH, HEIGHT, screen, 'Hard', sudoku_gen)
                     print_board(sudoku_gen)
                     menu = False
             # changes the color of the button if it is being hovered over
@@ -233,7 +229,6 @@ while game_on:
                  Cell(sudoku_gen[8][6], 8, 6, screen, (450, 600), 450, 600),
                  Cell(sudoku_gen[8][7], 8, 7, screen, (525, 600), 525, 600),
                  Cell(sudoku_gen[8][8], 8, 8, screen, (600, 600), 600, 600)]
-
 
     for cell in all_cells:
         if cell.value != 0:
@@ -361,9 +356,9 @@ while game_on:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
                             cell.set_sketched_value(copy_board[pos])
                         pos += 1
-                # not done yet
                 if event.key == pygame.K_KP_ENTER:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                            pass
+                            game1.place_number(cell.value)
+                            game1.draw(screen)
         pygame.display.update()

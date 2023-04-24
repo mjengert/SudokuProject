@@ -4,17 +4,20 @@ from constants import *
 
 class Board:
 
-    def __init__(self, width, height, screen, difficulty):
+    def __init__(self, width, height, screen, difficulty,  board):
+        self.selected_col = 0
+        self.selected_row = 0
         self.width = width
         self.height = height
         self.screen = screen
         self.difficulty = difficulty  # previously self.diff = difficulty - Julius
+        self.board = board
 
     # draws entire board
     def draw(self, screen):
 
         # draws thick horizontal lines for 9x9 board
-        for i in range(1, BOARD_ROWS+1):
+        for i in range(1, BOARD_ROWS + 1):
             pygame.draw.line(
                 screen,
                 LINE_COLOR,
@@ -44,7 +47,7 @@ class Board:
             )
 
         # draws thin vertical lines within each of the original 9x9 cells
-        for i in range(0, INNER_ROWS+1):
+        for i in range(0, INNER_ROWS + 1):
             pygame.draw.line(
                 screen,
                 LINE_COLOR,
@@ -110,34 +113,33 @@ class Board:
         return None, None
 
     def check_board(self):
-    # Checks if the board is valid according to Sudoku rules
+        # Checks if the board is valid according to Sudoku rules
 
-       # Check rows
-       for row in self.board:
-           if not self.is_valid(row):
-               return False
+        # Check rows
+        for row in self.board:
+            if not self.is_valid(row):
+                return False
 
-       # Check columns
-       for col in range(BOARD_COLS):
-           column = [self.board[row][col] for row in range(BOARD_ROWS)]
-           if not self.is_valid(column):
-               return False
+        # Check columns
+        for col in range(BOARD_COLS):
+            column = [self.board[row][col] for row in range(BOARD_ROWS)]
+            if not self.is_valid(column):
+                return False
 
-       # Check 3x3 grids
-       for i in range(0, BOARD_ROWS, 3):
-           for j in range(0, BOARD_COLS, 3):
-               grid = [self.board[row][col] for row in range(i, i + 3) for col in range(j, j + 3)]
-               if not self.is_valid(grid):
-                   return False
+        # Check 3x3 grids
+        for i in range(0, BOARD_ROWS, 3):
+            for j in range(0, BOARD_COLS, 3):
+                grid = [self.board[row][col] for row in range(i, i + 3) for col in range(j, j + 3)]
+                if not self.is_valid(grid):
+                    return False
 
-       return True
+        return True
 
     def is_valid(self, numbers):
-    # Helper method to check if a list of numbers is valid (no duplicates except for zeros)
+        # Helper method to check if a list of numbers is valid (no duplicates except for zeros)
         seen = set()
         for number in numbers:
             if number != 0 and number in seen:
                 return False
             seen.add(number)
         return True
-
