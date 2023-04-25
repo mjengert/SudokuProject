@@ -232,7 +232,7 @@ while game_on:
 
     for cell in all_cells:
         if cell.value != 0:
-            cell.set_sketched_value(cell.value)
+            cell.set_value(cell.value)
 
     copy_board = []
     for cell in all_cells:
@@ -305,11 +305,46 @@ while game_on:
             '''prints number to the screen at the specific cells coords if the cell is empty. if backspace is entered, 
             then the cell resets and a becomes empty again'''
             if event.type == pygame.KEYDOWN:
+
+                if event.key == pygame.K_UP:
+                    if game1.selected_col != 0:
+                        game1.selected_col -= 1
+                        game1.draw(screen)
+                        for cell in Cell.board:
+                            if game1.selected_row == cell.row and game1.selected_col == cell.col:
+                                cell.draw()
+
+                if event.key == pygame.K_DOWN:
+                    if game1.selected_col != 8:
+                        game1.selected_col += 1
+                        game1.draw(screen)
+                        for cell in Cell.board:
+                            if game1.selected_row == cell.row and game1.selected_col == cell.col:
+                                cell.draw()
+
+                if event.key == pygame.K_RIGHT:
+                    if game1.selected_row != 8:
+                        game1.selected_row += 1
+                        game1.draw(screen)
+                        for cell in Cell.board:
+                            if game1.selected_row == cell.row and game1.selected_col == cell.col:
+                                cell.draw()
+
+                if event.key == pygame.K_LEFT:
+                    if game1.selected_row != 0:
+                        game1.selected_row -= 1
+                        game1.draw(screen)
+                        for cell in Cell.board:
+                            if game1.selected_row == cell.row and game1.selected_col == cell.col:
+                                cell.draw()
+
                 if event.key == pygame.K_1:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
                             if cell.value == 0:
                                 cell.set_sketched_value(1)
+                                #cell.set_sketched_value(1)
+
                 if event.key == pygame.K_2:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:

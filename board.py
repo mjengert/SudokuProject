@@ -10,7 +10,7 @@ class Board:
         self.width = width
         self.height = height
         self.screen = screen
-        self.difficulty = difficulty  # previously self.diff = difficulty - Julius
+        self.difficulty = difficulty
         self.board = board
 
     # draws entire board
@@ -83,6 +83,8 @@ class Board:
         if self.selected_row is not None and self.selected_col is not None:
             self.board[self.selected_row][self.selected_col] = value
 
+
+
     def place_number(self, value):
         # allows placing a confirmed value in the currently selected cell
         if self.selected_row is not None and self.selected_col is not None:
@@ -132,7 +134,6 @@ class Board:
                 grid = [self.board[row][col] for row in range(i, i + 3) for col in range(j, j + 3)]
                 if not self.is_valid(grid):
                     return False
-
         return True
 
     def is_valid(self, numbers):
