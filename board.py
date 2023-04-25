@@ -117,15 +117,13 @@ class Board:
         # Checks if the board is valid according to Sudoku rules
 
         # Check rows
+        valid_row = True
         for row in board:
             for value in row:
                 if row.count(value) > 1 or value == 0:
-                    valid_row = False
-                else:
-                    valid_row = True
+                    return False
 
         # Check columns
-        valid_col = None
         for col in range(BOARD_COLS):
             column = [board[row][col] for row in range(BOARD_ROWS)]
             if self.is_valid(column):
