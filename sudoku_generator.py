@@ -160,6 +160,7 @@ class SudokuGenerator:
     These are the boxes which start at (0,0), (3,3), and (6,6)
 
 	Parameters: None
+	
 	Return: None
     '''
 
