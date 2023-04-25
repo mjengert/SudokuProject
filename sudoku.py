@@ -5,6 +5,10 @@ from cell import Cell
 from sudoku_generator import SudokuGenerator, generate_sudoku, print_board
 
 
+# We can discuss font choice and background/color scheme together
+# Ones in place hold that spot for testing before we decide -Maralynn
+
+
 # prints the initial menu where user selects difficulty level
 def start_menu():
     pygame.display.set_caption('Sudoku')
@@ -89,10 +93,12 @@ def game_button_outlines(color):
 
 
 # starts program and draws menu and buttons
+
 game_on = True
 while game_on:
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    # can change background; placeholder - Maralynn
     screen.fill((167, 242, 242))
     start_menu()
     start_button_outlines(BORDER_COLOR)
@@ -112,20 +118,20 @@ while game_on:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 420 <= mouse_pos[1] <= 420 + 40:
                     # creates game board and starts the generator for easy diff.
+                    game1 = Board(WIDTH, HEIGHT, screen, 'Easy')
                     sudoku_gen = generate_sudoku(9, 30)
-                    game1 = Board(WIDTH, HEIGHT, screen, 'Easy', sudoku_gen)
                     print_board(sudoku_gen)
                     menu = False
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 500 <= mouse_pos[1] <= 500 + 40:
                     # creates game board and starts the generator for medium diff.
+                    game1 = Board(WIDTH, HEIGHT, screen, 'Medium')
                     sudoku_gen = generate_sudoku(9, 40)
-                    game1 = Board(WIDTH, HEIGHT, screen, 'Medium', sudoku_gen)
                     print_board(sudoku_gen)
                     menu = False
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 580 <= mouse_pos[1] <= 580 + 40:
                     # creates game board and starts the generator for hard diff.
+                    game1 = Board(WIDTH, HEIGHT, screen, 'Hard')
                     sudoku_gen = generate_sudoku(9, 50)
-                    game1 = Board(WIDTH, HEIGHT, screen, 'Hard', sudoku_gen)
                     print_board(sudoku_gen)
                     menu = False
             # changes the color of the button if it is being hovered over
@@ -145,7 +151,7 @@ while game_on:
     # when difficulty is chosen, second while loop begins and sudoku board and buttons is printed
     screen.fill(BG_COLOR)
     game1.draw(screen)
-    # list of all cells on game board and uses values from the generated sudoku board
+    # creates all cells. will need to modify in the future when prefilled cells are created
     all_cells = [Cell(sudoku_gen[0][0], 0, 0, screen, (0, 0), 0, 0),
                  Cell(sudoku_gen[0][1], 0, 1, screen, (75, 0), 75, 0),
                  Cell(sudoku_gen[0][2], 0, 2, screen, (150, 0), 150, 0),
@@ -228,22 +234,23 @@ while game_on:
                  Cell(sudoku_gen[8][7], 8, 7, screen, (525, 600), 525, 600),
                  Cell(sudoku_gen[8][8], 8, 8, screen, (600, 600), 600, 600)]
 
-    sudoku_copy_board = sudoku_gen[:]
-
-    for cell in all_cells:
-        if cell.value != 0:
-            cell.set_cell_value(cell.value)
-    # creates copy of original sudoku board cells
     copy_board = []
     for cell in all_cells:
         copy_board.append(cell.value)
+
+    copy_board = []
+    for cell in all_cells:
+        copy_board.append(cell)
+
+    for cell in all_cells:
+        if cell.value != 0:
+            cell.set_sketched_value(cell.value)
 
     reset_cells = []
     for cell in all_cells:
         if cell.value == 0:
             reset_cells.append(cell)
 
-    # draws buttons for sudoku board screen
     game_button_outlines(BORDER_COLOR)
     exit_button(BUTTON_COLOR)
     restart_button(BUTTON_COLOR)
@@ -251,7 +258,6 @@ while game_on:
     # begins game
     game_start = True
     while game_start:
-        print(sudoku_copy_board)
         for event in pygame.event.get():
             # exits entire game
             if event.type == pygame.QUIT:
@@ -260,7 +266,7 @@ while game_on:
             mouse_pos = pygame.mouse.get_pos()
             # determines where and if mouse is clicked on each button
             if event.type == pygame.MOUSEBUTTONDOWN:
-                # resets all cells to original sudoku board and removes any sketched values
+                # not done
                 if 98.75 <= mouse_pos[0] <= 168.75 + 70 and 700 <= mouse_pos[1] <= 700 + 40:
                     for cell in reset_cells:
                         cell.set_sketched_value(0)
@@ -289,124 +295,78 @@ while game_on:
                 '''draws red box on the selected cell looks at mouse position (x,y) then draws red box around this 
                 coord. re-draws the sudoku board in between each cell selection to allow user to ensure one cell is 
                 chosen at a time. calls select() function to record what cell is being selected for input purposes'''
-                i, j = -1, -2
-                for row in sudoku_copy_board:
-                    i += 1
-                    j = -2
-                    for value in row:
-                        j += 1
-                        if (75 + 75 * j) <= mouse_pos[0] <= (150 + 75 * j) and (75 * i) <= mouse_pos[1] <= (
-                                75 * (i + 1)):
+                for row in range(9):
+                    for col in range(9):
+                        if (75 + 75 * row) <= mouse_pos[0] <= (150 + 75 * row) and (75 * col) <= mouse_pos[1] <= (
+                                75 * (col + 1)):
                             game1.draw(screen)
                             for cell in Cell.board:
-                                if cell.row == i and cell.col == j+1:
+                                if cell.row == row + 1 and cell.col == col:
                                     cell.draw()
-                                    game1.select(i, j+1)
+                                    game1.select(row + 1, col)
+                        if 0 <= mouse_pos[0] <= 75 and (75 * col) <= mouse_pos[1] <= (75 * (col + 1)):
+                            game1.draw(screen)
+                            for cell in Cell.board:
+                                if cell.row == 0 and cell.col == col:
+                                    cell.draw()
+                                    game1.select(row - 8, col)
             '''prints number to the screen at the specific cells coords if the cell is empty. if backspace is entered, 
             then the cell resets and a becomes empty again'''
             if event.type == pygame.KEYDOWN:
-                # moves red selection box up
-                if event.key == pygame.K_UP:
-                    if game1.selected_row != 0:
-                        game1.selected_row -= 1
-                        game1.draw(screen)
-                        for cell in Cell.board:
-                            if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                                cell.draw()
-                # moves red selection box down
-                if event.key == pygame.K_DOWN:
-                    if game1.selected_row != 8:
-                        game1.selected_row += 1
-                        game1.draw(screen)
-                        for cell in Cell.board:
-                            if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                                cell.draw()
-                # moves red selection box right
-                if event.key == pygame.K_RIGHT:
-                    if game1.selected_col != 8:
-                        game1.selected_col += 1
-                        game1.draw(screen)
-                        for cell in Cell.board:
-                            if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                                cell.draw()
-                # moves red selection box left
-                if event.key == pygame.K_LEFT:
-                    if game1.selected_col != 0:
-                        game1.selected_col -= 1
-                        game1.draw(screen)
-                        for cell in Cell.board:
-                            if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                                cell.draw()
-                # the following if statements sketched the corresponding values (1-9) into the selected cell
                 if event.key == pygame.K_1:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                            print(game1.selected_row, game1.selected_col)
                             if cell.value == 0:
-                                print(sudoku_copy_board)
-                                sudoku_gen[game1.selected_row][game1.selected_col] = 1
                                 cell.set_sketched_value(1)
                 if event.key == pygame.K_2:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
                             if cell.value == 0:
-                                sudoku_gen[game1.selected_row][game1.selected_col] = 2
                                 cell.set_sketched_value(2)
                 if event.key == pygame.K_3:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
                             if cell.value == 0:
-                                sudoku_gen[game1.selected_row][game1.selected_col] = 3
                                 cell.set_sketched_value(3)
                 if event.key == pygame.K_4:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
                             if cell.value == 0:
-                                sudoku_gen[game1.selected_row][game1.selected_col] = 4
                                 cell.set_sketched_value(4)
                 if event.key == pygame.K_5:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
                             if cell.value == 0:
-                                sudoku_gen[game1.selected_row][game1.selected_col] = 5
                                 cell.set_sketched_value(5)
                 if event.key == pygame.K_6:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
                             if cell.value == 0:
-                                sudoku_gen[game1.selected_row][game1.selected_col] = 6
                                 cell.set_sketched_value(6)
                 if event.key == pygame.K_7:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
                             if cell.value == 0:
-                                sudoku_gen[game1.selected_row][game1.selected_col] = 7
                                 cell.set_sketched_value(7)
                 if event.key == pygame.K_8:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
                             if cell.value == 0:
-                                sudoku_gen[game1.selected_row][game1.selected_col] = 8
                                 cell.set_sketched_value(8)
                 if event.key == pygame.K_9:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                            print(game1.selected_row, game1.selected_col)
                             if cell.value == 0:
-                                sudoku_gen[game1.selected_row][game1.selected_col] = 9
                                 cell.set_sketched_value(9)
-                # allows for deletion of a sketched values only
                 if event.key == pygame.K_BACKSPACE:
                     pos = 0
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                            cell.set_cell_value(copy_board[pos])
-                            sudoku_gen[game1.selected_row][game1.selected_col] = 0
+                            cell.set_sketched_value(copy_board[pos])
                         pos += 1
-                # allows for removal of red box once enter is pressed
+                # not done yet
                 if event.key == pygame.K_KP_ENTER:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                            game1.place_number(cell.value)
-                            game1.draw(screen)
+                            pass
         pygame.display.update()
