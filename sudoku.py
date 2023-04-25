@@ -251,7 +251,6 @@ while game_on:
     # begins game
     game_start = True
     while game_start:
-        print(sudoku_copy_board)
         for event in pygame.event.get():
             # exits entire game
             if event.type == pygame.QUIT:
@@ -302,8 +301,7 @@ while game_on:
                                 if cell.row == i and cell.col == j+1:
                                     cell.draw()
                                     game1.select(i, j+1)
-            '''prints number to the screen at the specific cells coords if the cell is empty. if backspace is entered, 
-            then the cell resets and a becomes empty again'''
+            # looks at all key presses
             if event.type == pygame.KEYDOWN:
                 # moves red selection box up
                 if event.key == pygame.K_UP:
