@@ -121,15 +121,18 @@ class Board:
         for row in board:
             for value in row:
                 if row.count(value) > 1 or value == 0:
-                    return False
+                    valid_row = False
 
         # Check columns
-        for col in range(BOARD_COLS):
+        valid_col = False
+        col = 0
+        while col < 8:
             column = [board[row][col] for row in range(BOARD_ROWS)]
             if self.is_valid(column):
                 valid_col += 1
                 if valid_col == 9:
                     valid_col = True
+            col += 1
 
         # Check 3x3 grids
         valid_grid = 0
