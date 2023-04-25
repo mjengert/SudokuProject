@@ -89,12 +89,10 @@ def game_button_outlines(color):
 
 
 # starts program and draws menu and buttons
-
 game_on = True
 while game_on:
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    # can change background; placeholder - Maralynn
     screen.fill((167, 242, 242))
     start_menu()
     start_button_outlines(BORDER_COLOR)
@@ -147,7 +145,7 @@ while game_on:
     # when difficulty is chosen, second while loop begins and sudoku board and buttons is printed
     screen.fill(BG_COLOR)
     game1.draw(screen)
-    # creates all cells. will need to modify in the future when prefilled cells are created
+    # list of all cells on game board and uses values from the generated sudoku board
     all_cells = [Cell(sudoku_gen[0][0], 0, 0, screen, (0, 0), 0, 0),
                  Cell(sudoku_gen[0][1], 0, 1, screen, (75, 0), 75, 0),
                  Cell(sudoku_gen[0][2], 0, 2, screen, (150, 0), 150, 0),
@@ -233,7 +231,7 @@ while game_on:
     for cell in all_cells:
         if cell.value != 0:
             cell.set_value(cell.value)
-
+    # creates copy of original sudoku board cells
     copy_board = []
     for cell in all_cells:
         copy_board.append(cell.value)
@@ -243,6 +241,7 @@ while game_on:
         if cell.value == 0:
             reset_cells.append(cell)
 
+    # draws buttons for sudoku board screen
     game_button_outlines(BORDER_COLOR)
     exit_button(BUTTON_COLOR)
     restart_button(BUTTON_COLOR)
@@ -258,7 +257,7 @@ while game_on:
             mouse_pos = pygame.mouse.get_pos()
             # determines where and if mouse is clicked on each button
             if event.type == pygame.MOUSEBUTTONDOWN:
-                # not done
+                # resets all cells to original sudoku board and removes any sketched values
                 if 98.75 <= mouse_pos[0] <= 168.75 + 70 and 700 <= mouse_pos[1] <= 700 + 40:
                     for cell in reset_cells:
                         cell.set_sketched_value(0)
@@ -305,7 +304,7 @@ while game_on:
             '''prints number to the screen at the specific cells coords if the cell is empty. if backspace is entered, 
             then the cell resets and a becomes empty again'''
             if event.type == pygame.KEYDOWN:
-
+                # moves red selection box up
                 if event.key == pygame.K_UP:
                     if game1.selected_col != 0:
                         game1.selected_col -= 1
@@ -313,7 +312,7 @@ while game_on:
                         for cell in Cell.board:
                             if game1.selected_row == cell.row and game1.selected_col == cell.col:
                                 cell.draw()
-
+                # moves red selection box down
                 if event.key == pygame.K_DOWN:
                     if game1.selected_col != 8:
                         game1.selected_col += 1
@@ -321,7 +320,7 @@ while game_on:
                         for cell in Cell.board:
                             if game1.selected_row == cell.row and game1.selected_col == cell.col:
                                 cell.draw()
-
+                # moves red selection box right
                 if event.key == pygame.K_RIGHT:
                     if game1.selected_row != 8:
                         game1.selected_row += 1
@@ -329,7 +328,7 @@ while game_on:
                         for cell in Cell.board:
                             if game1.selected_row == cell.row and game1.selected_col == cell.col:
                                 cell.draw()
-
+                # moves red selection box left
                 if event.key == pygame.K_LEFT:
                     if game1.selected_row != 0:
                         game1.selected_row -= 1
@@ -337,14 +336,12 @@ while game_on:
                         for cell in Cell.board:
                             if game1.selected_row == cell.row and game1.selected_col == cell.col:
                                 cell.draw()
-
+                # the following if statements sketched the corresponding values (1-9) into the selected cell
                 if event.key == pygame.K_1:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
                             if cell.value == 0:
                                 cell.set_sketched_value(1)
-                                #cell.set_sketched_value(1)
-
                 if event.key == pygame.K_2:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
@@ -385,12 +382,14 @@ while game_on:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
                             if cell.value == 0:
                                 cell.set_sketched_value(9)
+                # allows for deletion of a sketched values only
                 if event.key == pygame.K_BACKSPACE:
                     pos = 0
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                            cell.set_sketched_value(copy_board[pos])
+                            cell.set_value(copy_board[pos])
                         pos += 1
+                # allows for removal of red box once enter is pressed
                 if event.key == pygame.K_KP_ENTER:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
