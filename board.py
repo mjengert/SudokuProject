@@ -113,33 +113,53 @@ class Board:
                     return row, col
         return None, None
 
-    def check_board(self):
+    def check_board(self, board):
         # Checks if the board is valid according to Sudoku rules
 
         # Check rows
-        for row in self.board:
-            if not self.is_valid(row):
-                return False
+        valid_row = None
+        for row in board:
+            for value in row:
+                if row.count(value) > 1 or value == 0:
+                    valid_row = False
+        valid_row = True
 
         # Check columns
+        valid_col = None
         for col in range(BOARD_COLS):
-            column = [self.board[row][col] for row in range(BOARD_ROWS)]
-            if not self.is_valid(column):
-                return False
+            column = [board[row][col] for row in range(BOARD_ROWS)]
+            if self.is_valid(column):
+                valid_col += 1
+                if valid_col == 9:
+                    valid_col = True
 
         # Check 3x3 grids
+        valid_grid = 0
         for i in range(0, BOARD_ROWS, 3):
             for j in range(0, BOARD_COLS, 3):
-                grid = [self.board[row][col] for row in range(i, i + 3) for col in range(j, j + 3)]
-                if not self.is_valid(grid):
-                    return False
-        return True
+                grid = [board[row][col] for row in range(i, i + 3) for col in range(j, j + 3)]
+                if self.is_valid(grid):
+                    valid_grid += 1
+                    if valid_grid == 9:
+                        valid_grid = True
 
-    def is_valid(self, numbers):
+        if valid_row and valid_col and valid_grid:
+            return [True, valid_row, valid_col, valid_grid]
+        else:
+            return False
+
+    def is_valid(self, board):
         # Helper method to check if a list of numbers is valid (no duplicates except for zeros)
-        seen = set()
-        for number in numbers:
-            if number != 0 and number in seen:
-                return False
-            seen.add(number)
-        return True
+        amount = []
+        current_run = board[0]
+        current_count = 1
+        for value in range(1, len(board)):
+            if board[value] != 0:
+                current_count += 1
+            else:
+                amount.append(current_count)
+                current_run = board[value]
+                current_count = 1
+        amount.append(current_count)
+        return amount
+

@@ -251,6 +251,9 @@ while game_on:
     # begins game
     game_start = True
     while game_start:
+        win = game1.check_board(sudoku_copy_board)
+        print(win)
+        print(sudoku_copy_board)
         for event in pygame.event.get():
             # exits entire game
             if event.type == pygame.QUIT:
@@ -339,9 +342,7 @@ while game_on:
                 if event.key == pygame.K_1:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                            print(game1.selected_row, game1.selected_col)
                             if cell.value == 0:
-                                print(sudoku_copy_board)
                                 sudoku_gen[game1.selected_row][game1.selected_col] = 1
                                 cell.set_sketched_value(1)
                 if event.key == pygame.K_2:
@@ -389,7 +390,6 @@ while game_on:
                 if event.key == pygame.K_9:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                            print(game1.selected_row, game1.selected_col)
                             if cell.value == 0:
                                 sudoku_gen[game1.selected_row][game1.selected_col] = 9
                                 cell.set_sketched_value(9)
