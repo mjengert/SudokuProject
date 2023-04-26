@@ -497,8 +497,9 @@ while game_on:
                 mouse_pos = pygame.mouse.get_pos()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 420 <= mouse_pos[1] <= 420 + 40:
-                        pygame.quit()
-                        sys.exit()
+                        lose_screen = False
+                        menu = True
+                        game_start = False
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 420 <= mouse_pos[1] <= 420 + 40:
                     lose_restart_button(HOVER_BUTTON)
                 else:
