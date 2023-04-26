@@ -307,10 +307,12 @@ while game_on:
     winner = [None]
     gameover = False
     while game_start:
+        # checks if board is full
+        print(sudoku_gen)
         board_complete = board_full(sudoku_gen)
         if board_complete:
+            # checks if board is correct
             win = game1.check_board(sudoku_gen)
-            print(win)
             if win:
                 gameover = True
                 winner[0] = True
@@ -463,7 +465,7 @@ while game_on:
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
                             cell.set_cell_value(sudoku_copy_board[cell.row][cell.col])
-                            sudoku_gen[game1.selected_row][game1.selected_col] = 0
+                            sudoku_gen[game1.selected_row][game1.selected_col] = sudoku_copy_board[cell.row][cell.col]
                 # allows for removal of red box once enter is pressed
                 if event.key == pygame.K_KP_ENTER:
                     for cell in Cell.board:
