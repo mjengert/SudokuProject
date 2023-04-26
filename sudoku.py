@@ -252,8 +252,8 @@ while game_on:
     game_start = True
     while game_start:
         win = game1.check_board(sudoku_copy_board)
-        print(win)
-        print(sudoku_copy_board)
+        if win:
+            game_start = False
         for event in pygame.event.get():
             # exits entire game
             if event.type == pygame.QUIT:
