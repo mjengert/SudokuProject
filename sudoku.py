@@ -64,19 +64,19 @@ def reset_button(color):
 
 
 # draws restart button
-def restart_button(color):
+def restart_button(color, coordx, coordy):
     smaller_font = pygame.font.Font('Rajdhani-Bold.ttf', 30)
     button_restart = smaller_font.render('Restart', True, BG_COLOR)
-    pygame.draw.rect(screen, color, [337.5 - 70, 700, 140, 40])
+    pygame.draw.rect(screen, color, [coordx, coordy, 140, 40])
     screen.blit(button_restart, (337.5 - 45, 700))
     pygame.display.update()
 
 
 # draws exit button
-def exit_button(color):
+def exit_button(color, coordx, coordy):
     smaller_font = pygame.font.Font('Rajdhani-Bold.ttf', 30)
     button_exit = smaller_font.render('Exit', True, BG_COLOR)
-    pygame.draw.rect(screen, color, [506.25 - 70, 700, 140, 40])
+    pygame.draw.rect(screen, color, [coordx, coordy, 140, 40])
     screen.blit(button_exit, (506.25 - 25, 700))
     pygame.display.update()
 
@@ -86,6 +86,12 @@ def game_button_outlines(color):
     pygame.draw.rect(screen, color, [168.75 - 75, 695, 150, 50])
     pygame.draw.rect(screen, color, [337.5 - 75, 695, 150, 50])
     pygame.draw.rect(screen, color, [506.25 - 75, 695, 150, 50])
+
+def board_full(board):
+    for row in board:
+        if cell.value == 0:
+            return False
+    return True
 
 
 # starts program and draws menu and buttons
@@ -245,15 +251,21 @@ while game_on:
 
     # draws buttons for sudoku board screen
     game_button_outlines(BORDER_COLOR)
-    exit_button(BUTTON_COLOR)
-    restart_button(BUTTON_COLOR)
+    exit_button(BUTTON_COLOR, 337.5 - 70, 700)
+    restart_button(BUTTON_COLOR, 506.25 - 70, 700)
     reset_button(BUTTON_COLOR)
     # begins game
     game_start = True
+    win_screen = False
+    lose_screen = False
     while game_start:
-        win = game1.check_board(sudoku_copy_board)
-        if win:
-            game_start = False
+        board_complete = board_full(all_cells)
+        if board_complete:
+            win = game1.check_board(sudoku_copy_board)
+            if win:
+                win_screen = True
+            else:
+                lose_screen = True
         for event in pygame.event.get():
             # exits entire game
             if event.type == pygame.QUIT:
@@ -278,14 +290,14 @@ while game_on:
             if 98.75 <= mouse_pos[0] <= 168.75 + 70 and 700 <= mouse_pos[1] <= 700 + 40:
                 reset_button(HOVER_BUTTON)
             elif 267.5 <= mouse_pos[0] <= 337.5 + 70 and 700 <= mouse_pos[1] <= 700 + 40:
-                restart_button(HOVER_BUTTON)
+                restart_button(HOVER_BUTTON, 506.25 - 70, 700)
             elif 436.25 <= mouse_pos[0] <= 506.25 + 70 and 700 <= mouse_pos[1] <= 700 + 40:
-                exit_button(HOVER_BUTTON)
+                exit_button(HOVER_BUTTON, 337.5 - 70, 700)
             # if button isn't being hovered over, it returns back to original color
             else:
                 reset_button(BUTTON_COLOR)
-                restart_button(BUTTON_COLOR)
-                exit_button(BUTTON_COLOR)
+                restart_button(BUTTON_COLOR, 506.25 - 70, 700)
+                exit_button(BUTTON_COLOR, 337.5 - 70, 700)
             # draws red box on selected cell for the first col
             if event.type == pygame.MOUSEBUTTONDOWN:
                 '''draws red box on the selected cell looks at mouse position (x,y) then draws red box around this 
@@ -301,9 +313,9 @@ while game_on:
                                 75 * (i + 1)):
                             game1.draw(screen)
                             for cell in Cell.board:
-                                if cell.row == i and cell.col == j+1:
+                                if cell.row == i and cell.col == j + 1:
                                     cell.draw()
-                                    game1.select(i, j+1)
+                                    game1.select(i, j + 1)
             # looks at all key presses
             if event.type == pygame.KEYDOWN:
                 # moves red selection box up
@@ -408,3 +420,12 @@ while game_on:
                             game1.place_number(cell.value)
                             game1.draw(screen)
         pygame.display.update()
+
+        while win_screen == True:
+            screen.fill((167, 242, 242))
+            exit_button()
+            pygame.display.update()
+
+        while lose_screen == True:
+            screen.fill((167, 242, 242))
+            pygame.display.update()

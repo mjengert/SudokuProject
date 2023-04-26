@@ -174,3 +174,5 @@ class Board:
         if amount[0] == 9:
             return True
         return False
+
+
