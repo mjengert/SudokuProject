@@ -181,7 +181,7 @@ class SudokuGenerator:
 	Return:
 	boolean (whether or not we could solve the board)
     '''
-
+    # given to us, fills the remaining cells of the board
     def fill_remaining(self, row, col):
         if (col >= self.row_length and row < self.row_length - 1):
             row += 1
@@ -267,6 +267,7 @@ Return: list[list] (a 2D Python list to represent the board)
 '''
 
 
+# generates the sudoku board and removes cells
 def generate_sudoku(size, removed):
     sudoku = SudokuGenerator(size, removed)
     sudoku.fill_values()
@@ -276,6 +277,7 @@ def generate_sudoku(size, removed):
     return board
 
 
+# prints the board list for debug in main  file
 def print_board(board):
     for row in range(9):
         for col in range(9):

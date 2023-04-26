@@ -98,6 +98,7 @@ def win_exit_button(color):
     pygame.draw.rect(screen, color, [337.5 - 70, 420, 140, 40])
     screen.blit(button_exit, (337.5 - 25, 420))
 
+
 # draws rectangle behind in game buttons for border
 def game_button_outlines(color):
     pygame.draw.rect(screen, color, [168.75 - 75, 695, 150, 50])
@@ -105,12 +106,15 @@ def game_button_outlines(color):
     pygame.draw.rect(screen, color, [506.25 - 75, 695, 150, 50])
 
 
+# determines which buttons to draw based win/lose
 def end_button(win):
     if win:
         win_exit_button(BUTTON_COLOR)
     else:
         lose_restart_button(BUTTON_COLOR)
 
+
+# draws text for win/lose screen
 def end_text(win):
     if win:
         big_font = pygame.font.Font('Rajdhani-Bold.ttf', 80)
@@ -126,6 +130,7 @@ def end_text(win):
         screen.blit(loss_text, loss_box)
 
 
+# determines if board is full
 def board_full(board):
     for row in board:
         for value in row:
@@ -464,13 +469,13 @@ while game_on:
                             game1.place_number(cell.value)
                             game1.draw(screen)
         pygame.display.update()
-
+        # enters loop when game board is full
         while gameover:
             screen.fill((167, 242, 242))
             end_text(winner[0])
             end_button(winner[0])
             break
-
+        # if player won, enters this loop
         while win_screen:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -479,15 +484,17 @@ while game_on:
                 # checks mouse position and determines if it is clicked
                 mouse_pos = pygame.mouse.get_pos()
                 if event.type == pygame.MOUSEBUTTONDOWN:
+                    # if selected game ends and closes
                     if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 420 <= mouse_pos[1] <= 420 + 40:
                         pygame.quit()
                         sys.exit()
+                # changes color of button when mouse hovers over it
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 420 <= mouse_pos[1] <= 420 + 40:
                     win_exit_button(HOVER_BUTTON)
                 else:
                     win_exit_button(BUTTON_COLOR)
             pygame.display.update()
-
+        # if player lost, enters this loop
         while lose_screen:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -496,10 +503,12 @@ while game_on:
                 # checks mouse position and determines if it is clicked
                 mouse_pos = pygame.mouse.get_pos()
                 if event.type == pygame.MOUSEBUTTONDOWN:
+                    # if selected, restarts game and brings up menu again
                     if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 420 <= mouse_pos[1] <= 420 + 40:
                         lose_screen = False
                         menu = True
                         game_start = False
+                # changes color of button when mouse hovers over it
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 420 <= mouse_pos[1] <= 420 + 40:
                     lose_restart_button(HOVER_BUTTON)
                 else:
