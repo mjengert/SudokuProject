@@ -112,20 +112,18 @@ class Board:
         # Checks if the board is valid according to Sudoku rules
 
         # Check rows
-        valid_row = True
-        for row in board:
-            for value in row:
-                if row.count(value) > 1 or value == 0:
-                    valid_row = False
+        valid_row = False
+        if self.is_valid(board):
+            valid_row = True
 
         # Check columns
         valid_col = False
         all_cols = []
         for row in range(1):
-            for col in range(BOARD_COLS):
-                column = [board[row][col] for row in range(BOARD_ROWS)]
+            for col in range(9):
+                column = [board[row][col] for row in range(9)]
                 all_cols.append(column)
-        if self.is_valid_col(all_cols):
+        if self.is_valid(all_cols):
             valid_col = True
 
         # Check 3x3 grids
@@ -135,7 +133,7 @@ class Board:
             for j in range(0, 9, 3):
                 grid0 = [board[row][col] for row in range(i, i + 3) for col in range(j, j + 3)]
                 grid_list.append(grid0)
-        if self.is_valid_grid(grid_list):
+        if self.is_valid(grid_list):
             valid_grid = True
 
         # returns True if the all checks are cleared through
@@ -144,23 +142,11 @@ class Board:
         else:  # returns False if not all checks passed through
             return False
 
-    def is_valid_col(self, board):
+    def is_valid(self, board):
         # Helper method to check if a list of numbers is valid (no duplicates except for zeros)
-        # specifically for columns
         valid_row = True
         for row in board:
             for value in row:
                 if row.count(value) > 1 or value == 0:
                     valid_row = False
         return valid_row
-
-    def is_valid_grid(self, board):
-        # Helper method to check if a list of numbers is valid (no duplicates except for zeros)
-        # specifically for grid square
-        print(board)
-        valid_grid = True
-        for row in board:
-            for value in row:
-                if row.count(value) > 1 or value == 0:
-                    valid_grid = False
-        return valid_grid

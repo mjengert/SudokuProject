@@ -164,16 +164,19 @@ while game_on:
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 420 <= mouse_pos[1] <= 420 + 40:
                     # creates game board and starts the generator for easy diff.
                     sudoku_gen = generate_sudoku(9, 30)
+                    sudoku_tuple_copy = tuple(tuple(i) for i in sudoku_gen)
                     game1 = Board(WIDTH, HEIGHT, screen, 'Easy', sudoku_gen)
                     menu = False
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 500 <= mouse_pos[1] <= 500 + 40:
                     # creates game board and starts the generator for medium diff.
                     sudoku_gen = generate_sudoku(9, 40)
+                    sudoku_tuple_copy = tuple(tuple(i) for i in sudoku_gen)
                     game1 = Board(WIDTH, HEIGHT, screen, 'Medium', sudoku_gen)
                     menu = False
                 if 267.5 <= mouse_pos[0] <= 337.5 + 70 and 580 <= mouse_pos[1] <= 580 + 40:
                     # creates game board and starts the generator for hard diff.
                     sudoku_gen = generate_sudoku(9, 50)
+                    sudoku_tuple_copy = tuple(tuple(i) for i in sudoku_gen)
                     game1 = Board(WIDTH, HEIGHT, screen, 'Hard', sudoku_gen)
                     menu = False
             # changes the color of the button if it is being hovered over
@@ -276,8 +279,8 @@ while game_on:
                  Cell(sudoku_gen[8][7], 8, 7, screen, (525, 600), 525, 600),
                  Cell(sudoku_gen[8][8], 8, 8, screen, (600, 600), 600, 600)]
 
-    # creates copy of original sudoku board
-    sudoku_copy_board = sudoku_gen[:]
+    # creates copy of original sudoku board from tuple to ensure values are not changed
+    sudoku_copy_board = list(list(i) for i in sudoku_tuple_copy)
     # keeps track of all cells that did not have an original value of 0
     for cell in all_cells:
         if cell.value != 0:
@@ -304,9 +307,9 @@ while game_on:
     winner = [None]
     gameover = False
     while game_start:
-        board_complete = board_full(sudoku_copy_board)
+        board_complete = board_full(sudoku_gen)
         if board_complete:
-            win = game1.check_board(sudoku_copy_board)
+            win = game1.check_board(sudoku_gen)
             print(win)
             if win:
                 gameover = True
@@ -457,12 +460,10 @@ while game_on:
                                 cell.set_sketched_value(9)
                 # allows for deletion of a sketched values only
                 if event.key == pygame.K_BACKSPACE:
-                    pos = 0
                     for cell in Cell.board:
                         if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                            cell.set_cell_value(copy_board[pos])
+                            cell.set_cell_value(sudoku_copy_board[cell.row][cell.col])
                             sudoku_gen[game1.selected_row][game1.selected_col] = 0
-                        pos += 1
                 # allows for removal of red box once enter is pressed
                 if event.key == pygame.K_KP_ENTER:
                     for cell in Cell.board:

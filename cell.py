@@ -1,6 +1,5 @@
 import pygame
 
-
 # creates cell class
 class Cell:
     board = []
