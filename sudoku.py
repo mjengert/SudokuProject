@@ -307,6 +307,7 @@ while game_on:
         board_complete = board_full(sudoku_copy_board)
         if board_complete:
             win = game1.check_board(sudoku_copy_board)
+            print(win)
             if win:
                 gameover = True
                 winner[0] = True

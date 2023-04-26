@@ -120,63 +120,47 @@ class Board:
 
         # Check columns
         valid_col = False
-        col = 0
-        while col <= 8:
-            column = [board[row][col] for row in range(BOARD_ROWS)]
-            if self.is_valid_col(column):
-                valid_col += 1
-                if valid_col == 9:
-                    valid_col = True
-            col += 1
+        all_cols = []
+        for row in range(1):
+            for col in range(BOARD_COLS):
+                column = [board[row][col] for row in range(BOARD_ROWS)]
+                all_cols.append(column)
+        if self.is_valid_col(all_cols):
+            valid_col = True
 
         # Check 3x3 grids
-        valid_grid = True
-        num_grid = 0
-        for i in range(0, BOARD_ROWS, 3):
-            for j in range(0, BOARD_COLS, 3):
-                grid = [board[row][col] for row in range(i, i + 3) for col in range(j, j + 3)]
-                if self.is_valid_grid(grid) == False:
-                    valid_grid = False
+        valid_grid = False
+        grid_list = []
+        for i in range(0, 9, 3):
+            for j in range(0, 9, 3):
+                grid0 = [board[row][col] for row in range(i, i + 3) for col in range(j, j + 3)]
+                grid_list.append(grid0)
+        if self.is_valid_grid(grid_list):
+            valid_grid = True
 
         # returns True if the all checks are cleared through
-        if valid_row == True and valid_col == True and valid_grid == True:
+        if valid_row and valid_col and valid_grid:
             return True
-
-        # returns False if not all checks passed through
-        return False
+        else:  # returns False if not all checks passed through
+            return False
 
     def is_valid_col(self, board):
         # Helper method to check if a list of numbers is valid (no duplicates except for zeros)
         # specifically for columns
-        amount = []
-        current_run = board[0]
-        current_count = 1
-        for value in range(1, len(board)):
-            if board[value] != 0:
-                current_count += 1
-            else:
-                amount.append(current_count)
-                current_run = board[value]
-                current_count = 1
-        amount.append(current_count)
-        return amount
+        valid_row = True
+        for row in board:
+            for value in row:
+                if row.count(value) > 1 or value == 0:
+                    valid_row = False
+        return valid_row
 
     def is_valid_grid(self, board):
         # Helper method to check if a list of numbers is valid (no duplicates except for zeros)
         # specifically for grid square
-        amount = []
-        current_run = board[0]
-        current_count = 1
-        for value in range(1, len(board)):
-            if board[value] != 0:
-                current_count += 1
-            else:
-                amount.append(current_count)
-                current_run = board[value]
-                current_count = 1
-        amount.append(current_count)
-        if amount[0] == 9:
-            return True
-        return False
-
-
+        print(board)
+        valid_grid = True
+        for row in board:
+            for value in row:
+                if row.count(value) > 1 or value == 0:
+                    valid_grid = False
+        return valid_grid
