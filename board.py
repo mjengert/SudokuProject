@@ -116,7 +116,7 @@ class Board:
         for row in board:
             for value in row:
                 if row.count(value) > 1 or value == 0:
-                    return False
+                    valid_row = False
 
         # Check columns
         valid_col = False
@@ -138,13 +138,16 @@ class Board:
                 if self.is_valid_grid(grid) == False:
                     valid_grid = False
 
-        if valid_row and valid_col and valid_grid:
+        # returns True if the all checks are cleared through
+        if valid_row == True and valid_col == True and valid_grid == True:
             return True
-        else:
-            return False
+
+        # returns False if not all checks passed through
+        return False
 
     def is_valid_col(self, board):
         # Helper method to check if a list of numbers is valid (no duplicates except for zeros)
+        # specifically for columns
         amount = []
         current_run = board[0]
         current_count = 1
@@ -160,6 +163,7 @@ class Board:
 
     def is_valid_grid(self, board):
         # Helper method to check if a list of numbers is valid (no duplicates except for zeros)
+        # specifically for grid square
         amount = []
         current_run = board[0]
         current_count = 1
