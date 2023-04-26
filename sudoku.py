@@ -378,36 +378,40 @@ while game_on:
             if event.type == pygame.KEYDOWN:
                 # moves red selection box up
                 if event.key == pygame.K_UP:
-                    if game1.selected_row != 0:
-                        game1.selected_row -= 1
-                        game1.draw(screen)
-                        for cell in Cell.board:
-                            if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                                cell.draw()
+                    if game1.selected_col is not None:
+                        if game1.selected_row != 0:
+                            game1.selected_row -= 1
+                            game1.draw(screen)
+                            for cell in all_cells:
+                                if game1.selected_row == cell.row and game1.selected_col == cell.col:
+                                    cell.draw()
                 # moves red selection box down
                 if event.key == pygame.K_DOWN:
-                    if game1.selected_row != 8:
-                        game1.selected_row += 1
-                        game1.draw(screen)
-                        for cell in all_cells:
-                            if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                                cell.draw()
+                    if game1.selected_col is not None:
+                        if game1.selected_row != 8:
+                            game1.selected_row += 1
+                            game1.draw(screen)
+                            for cell in all_cells:
+                                if game1.selected_row == cell.row and game1.selected_col == cell.col:
+                                    cell.draw()
                 # moves red selection box right
                 if event.key == pygame.K_RIGHT:
-                    if game1.selected_col != 8:
-                        game1.selected_col += 1
-                        game1.draw(screen)
-                        for cell in all_cells:
-                            if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                                cell.draw()
+                    if game1.selected_row is not None:
+                        if game1.selected_col != 8:
+                            game1.selected_col += 1
+                            game1.draw(screen)
+                            for cell in all_cells:
+                                if game1.selected_row == cell.row and game1.selected_col == cell.col:
+                                    cell.draw()
                 # moves red selection box left
                 if event.key == pygame.K_LEFT:
-                    if game1.selected_col != 0:
-                        game1.selected_col -= 1
-                        game1.draw(screen)
-                        for cell in all_cells:
-                            if game1.selected_row == cell.row and game1.selected_col == cell.col:
-                                cell.draw()
+                    if game1.selected_row is not None:
+                        if game1.selected_col != 0:
+                            game1.selected_col -= 1
+                            game1.draw(screen)
+                            for cell in all_cells:
+                                if game1.selected_row == cell.row and game1.selected_col == cell.col:
+                                    cell.draw()
                 # the following if statements sketched the corresponding values (1-9) into the selected cell
                 if event.key == pygame.K_1:
                     for cell in all_cells:
