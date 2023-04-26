@@ -6,8 +6,8 @@ from constants import *
 class Board:
     # board object
     def __init__(self, width, height, screen, difficulty, board):
-        self.selected_col = 0
-        self.selected_row = 0
+        self.selected_col = None
+        self.selected_row = None
         self.width = width
         self.height = height
         self.screen = screen
