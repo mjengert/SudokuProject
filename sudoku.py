@@ -281,7 +281,7 @@ while game_on:
 
     # creates copy of original sudoku board from tuple to ensure values are not changed
     sudoku_copy_board = list(list(i) for i in sudoku_tuple_copy)
-    # keeps track of all cells that did not have an original value of 0
+    # displays all non-zero values on screen
     for cell in all_cells:
         if cell.value != 0:
             cell.set_cell_value(cell.value)
@@ -308,19 +308,17 @@ while game_on:
     gameover = False
     while game_start:
         # checks if board is full
-        print(sudoku_gen)
-        print(sudoku_copy_board)
-        for cell in all_cells:
-            print(cell.value, end=" ")
         board_complete = board_full(sudoku_gen)
         if board_complete:
             # checks if board is correct
             win = game1.check_board(sudoku_gen)
             if win:
+                # if correct enters win loop and exits game loop
                 gameover = True
                 winner[0] = True
                 win_screen = True
             else:
+                # if incorrect enters lose loop and exits game loop
                 gameover = True
                 winner[0] = False
                 lose_screen = True
